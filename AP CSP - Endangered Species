@@ -1,0 +1,171 @@
+//Sriram Vallabhaneni and Anvay Patil
+// screen 1
+onEvent("button1", "click", function ( ) {
+  setScreen("optionPage");
+  playSound("sound://category_app/app_interface_button_4.mp3");
+});
+// screen 2
+onEvent("homeButton", "click", function ( ) {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("homeScreen");
+});
+onEvent("quizButton", "click", function ( ) {
+  click = 0;
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("quizScreen1");
+});
+// animal pages
+onEvent("redPanda", "click", function ( ) {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("pandaPage");
+});
+onEvent("blackRhino", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("rhinoPage");
+});
+onEvent("orangutan", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("orangutanPage");
+});
+onEvent("bengalTiger", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("tigerPage");
+});
+onEvent("returnButton1", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("optionPage");
+});
+onEvent("returnButton2", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("optionPage");
+});
+onEvent("returnButton3", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("optionPage");
+});
+onEvent("returnButton4", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("optionPage");
+});
+// quiz
+var score = 0;
+var click = 0;
+onEvent("wrongAnswer1", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = click + 1;
+  setProperty("wrongAnswer1", "background-color", "red");
+  setProperty("wrongAnswer1", "text", "Incorrect");
+  setProperty("question1", "text", "Try Again!");
+});
+onEvent("wrongAnswer2", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = click + 1;
+  setProperty("wrongAnswer2", "background-color", "red");
+  setProperty("wrongAnswer2", "text", "Incorrect");
+  setProperty("question2", "text", "Try Again!");
+});
+onEvent("wrongAnswer3", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = click + 1;
+  setProperty("wrongAnswer3", "background-color", "red");
+  setProperty("wrongAnswer3", "text", "Incorrect");
+  setProperty("question2", "text", "Try Again!");
+});
+onEvent("wrongAnswer4", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = click + 1;
+  setProperty("wrongAnswer4", "background-color", "red");
+  setProperty("wrongAnswer4", "text", "Incorrect");
+  setProperty("question2", "text", "Try Again!");
+});
+onEvent("wrongAnswer5", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = click + 1;
+  setProperty("wrongAnswer5", "background-color", "red");
+  setProperty("wrongAnswer5", "text", "Incorrect");
+  setProperty("question3", "text", "Try Again!");
+});
+onEvent("wrongAnswer6", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = click + 1;
+  setProperty("wrongAnswer6", "background-color", "red");
+  setProperty("wrongAnswer6", "text", "Incorrect");
+  setProperty("question4", "text", "Try Again!");
+});
+onEvent("wrongAnswer7", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = click + 1;
+  setProperty("wrongAnswer7", "background-color", "red");
+  setProperty("wrongAnswer7", "text", "Incorrect");
+  setProperty("question4", "text", "Try Again!");
+});
+onEvent("wrongAnswer8", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = click + 1;
+  setProperty("wrongAnswer8", "background-color", "red");
+  setProperty("wrongAnswer8", "text", "Incorrect");
+  setProperty("question4", "text", "Try Again!");
+});
+onEvent("rightAnswer1", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setProperty("rightAnswer1", "background-color", "green");
+  setProperty("rightAnswer1", "text", "Correct!");
+  setProperty("question1", "text", "That's right! Rhinos date back to around 50 million years! Of course, they were not exactly the same.");
+  if (click < 1) {
+    score = score + 1;
+  }
+});
+onEvent("rightAnswer2", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setProperty("rightAnswer2", "background-color", "green");
+  setProperty("rightAnswer2", "text", "Correct!");
+  setProperty("question2", "text", "That's right! Red pandas mainly live in the Eastern Himalayas, near countries like China, Nepal, and Bhutan.");
+  if (click < 1) {
+    score = score + 1;
+  }
+});
+onEvent("rightAnswer3", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setProperty("rightAnswer3", "background-color", "green");
+  setProperty("rightAnswer3", "text", "Correct!");
+  setProperty("question3", "text", "That's right! Orangutans love to eat fruit, and by doing so, they help disperse fruit seeds in their waste.");
+  if (click < 1) {
+    score = score + 1;
+  }
+});
+onEvent("rightAnswer4", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setProperty("rightAnswer4", "background-color", "green");
+  setProperty("rightAnswer4", "text", "Correct!");
+  setProperty("question4", "text", "That's right! As it stands, there are currently around 2,500 Bengal tigers in the wild.");
+  if (click < 1) {
+    score = score + 1;
+  }
+});
+
+onEvent("nextPageButton", "click", function () {
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  click = 0;
+  setScreen("quizScreen2");
+});
+onEvent("nextPageButton2", "click", function ( ) {
+  click = 0;
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("quizScreen3");
+});
+onEvent("nextPageButton3", "click", function ( ) {
+  click = 0;
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("quizScreen4");
+});
+onEvent("nextPageButton4", "click", function ( ) {
+  click = 0;
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("quizScreen5");
+  setProperty("label2", "text", score + "/4");
+});
+onEvent("quizOptionsButton", "click", function () {
+  click = 0;
+  playSound("sound://category_app/app_interface_button_4.mp3");
+  setScreen("optionPage");
+});
