@@ -1,0 +1,96 @@
+//Idea inspired by Human Benchmark: Sequence Memory 
+//https://humanbenchmark.com/tests/sequence
+
+//lists and variables used
+//initiates a list that will be used to preserve the sequence that the user has to follow
+var sequence = [];
+//initiates a variable that will be used to count the amount of clicks by the user
+var counter = 0;
+//initiates the timer that will make sure the user doesn't click when the sequence is showing
+var timer = 0;
+
+//The following two onEvents start or restart the game upon user input
+onEvent("startButton", "click", function () {
+  setScreen("GameScreen");
+  sequenceCheckAndDisplay("Begin");
+});
+onEvent("restartButton", "click", function () {
+  sequenceCheckAndDisplay("Begin");
+});
+
+//All following onEvents are used to get user inputs to the timer checker function
+onEvent("square0", "click", function(){
+  timerChecker(0);
+});
+onEvent("square1", "click", function(){
+  timerChecker(1);
+});
+onEvent("square2", "click", function(){
+  timerChecker(2);
+});
+onEvent("square3", "click", function(){
+  timerChecker(3);
+});
+onEvent("square4", "click", function(){
+  timerChecker(4);
+});
+onEvent("square5", "click", function(){
+  timerChecker(5);
+});
+onEvent("square6", "click", function(){
+  timerChecker(6);
+});
+onEvent("square7", "click", function(){
+  timerChecker(7);
+});
+onEvent("square8", "click", function(){
+  timerChecker(8);
+});
+
+function sequenceCheckAndDisplay (state, square) {
+  counter +=1;
+  if (sequence[counter-1] == square && counter == sequence.length || state == "Begin"){
+    console.log(sequence);
+    hideElement("restartButton");
+    appendItem(sequence, randomNumber(0, 8));
+    counter = 0;
+    var count = 0;
+    setProperty("levelLabel", "text", "Level: " + sequence.length);
+    timer = 0;
+    //timed iteration; used so that a visible difference can be seen when the colors change for each square of the sequence
+    var ret = setInterval(function() {
+      count = count + 1;
+      setProperty("square"+sequence[count-1], "background-color",rgb(255, 255, 255));
+      console.log(sequence[count-1]);
+      setTimeout(function() {
+        setProperty("square"+sequence[count-1], "background-color",rgb(0, 165, 255));
+        console.log(-1*sequence[count-1]);
+      }, 250);
+      //if this condition is met, the iteration ends
+      if (count == sequence.length){
+      clearInterval(ret);
+      }
+      // timer is used so that user can't click while the sequence is being shown. used in timerChecker function
+      timer += 500;
+    }, 500);
+  } else if (sequence[counter-1] != square || state == "Ending"){
+    setProperty("levelLabel", "text", "You messed up at level " + sequence.length + "!");
+    sequence = [];
+    showElement("restartButton");
+  }
+}
+//creates the lag between click and color change of sqaure from user input
+function clicker (square) {
+  setProperty(square, "background-color", rgb(255 ,255 ,255));
+  setTimeout(function() {
+    setProperty(square, "background-color", rgb(0, 165, 255));
+  }, 200);
+}
+
+//if conditions are met, arguments are passed to SeqenceCheckAndDisplay and clicker functions
+function timerChecker (square){
+  if (timer == sequence.length*500 && sequence.length > 0){
+    sequenceCheckAndDisplay("Running", square);
+    clicker("square" + square);
+  }
+}
