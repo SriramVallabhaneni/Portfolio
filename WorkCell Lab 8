@@ -1,0 +1,114 @@
+/*----------------------------------------------------------------------------*/
+/*                                                                            */
+/*    Module:       main.cpp                                                  */
+/*    Author:       VEX                                                       */
+/*    Created:      Tue Mar 16 2021                                           */
+/*    Description:  Arm Manual Movement                                       */
+/*                                                                            */
+/*    This example will continuously display the current                      */
+/*    position of the arm on the V5 Brain's screen and allow you              */
+/*    to manually move the arm around                                         */
+/*                                                                            */
+/*----------------------------------------------------------------------------*/
+
+
+// ---- START VEXCODE CONFIGURED DEVICES ----
+// Robot Configuration:
+// [Name]               [Type]        [Port(s)]
+// RoboticArm1          RoboticArm    1, 2, 3, 4, A, B, C, D
+// EStop                bumper        E              
+// Magnet5              electromagnet 5              
+// Optical6             optical       6              
+// ---- END VEXCODE CONFIGURED DEVICES ----
+
+
+#include "vex.h"
+
+
+using namespace vex;
+
+
+// function to run when the emergency stop button is pressed
+
+
+
+
+double Magnet5_duration = 500.0;
+float myVariable;
+
+
+event message1 = event();
+
+
+// "when started" hat block
+int whenStarted1() {
+ RoboticArm1.setMasteringValues(1843.0,2212.0,1966.0,369.0);
+ RoboticArm1.setToolTipOffset(-0.7, 0.0, -2.0);
+ RoboticArm1.setJointMoveSpeed(15.0);
+ RoboticArm1.setLinearMoveSpeed(5.0);
+ Magnet5.setPower(100.0);
+ Magnet5_duration = 1000;
+ Optical6.setLightPower(100.0, percent);
+ return 0;
+}
+
+
+// "when EStop pressed" hat block
+void onevent_EStop_pressed_0() {
+ RoboticArm1.emergencyStop();
+}
+
+
+// "when Brain screen pressed" hat block
+void onevent_Brain_screen_pressed_0() {
+ Magnet5.setPower(100.0);
+ Magnet5.pickup(Magnet5_duration);
+ RoboticArm1.moveToPositionJoint(8.2, -6.3, 3.5);
+ wait(1.0, seconds);
+ RoboticArm1.moveToPositionJoint(8.0, -6.2, 0.164);
+ wait(1.0, seconds);
+ RoboticArm1.moveToPositionJoint(8.0, -6.1, 3.5);
+ wait(1.0, seconds);
+ RoboticArm1.moveToPositionJoint(8, -2.0, 2.8);
+ if (Optical6.color() == red) {
+   RoboticArm1.moveToPositionJoint(9.497, 2.1, 2.129);
+   wait(1.0, seconds);
+   Magnet5.drop();
+ }
+ if (Optical6.color() == blue) {
+   RoboticArm1.moveToPositionJoint(9.497, 3.8, 2.129);
+   wait(1.0, seconds);
+   Magnet5.drop();
+ }
+ if (Optical6.color() == green) {
+   RoboticArm1.moveToPositionJoint(6.7, 4.2, 2.129);
+   wait(1.0, seconds);
+   Magnet5.drop();
+ }
+}
+
+
+
+
+int main() {
+ // register event handlers
+ EStop.pressed(onevent_EStop_pressed_0);
+ Brain.Screen.pressed(onevent_Brain_screen_pressed_0);
+
+
+ wait(15, msec);
+ // post event registration
+
+
+ // set default print color to black
+ printf("\033[30m");
+
+
+ // wait for rotation sensor to fully initialize
+ wait(30, msec);
+
+
+ whenStarted1();
+}
+
+
